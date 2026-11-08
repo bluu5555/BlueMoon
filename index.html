@@ -20,7 +20,7 @@ body{margin:0;min-height:100vh;background:linear-gradient(180deg,#070b1f 0%,#0f1
 @keyframes fl{50%{transform:translateY(-5px)}}
 @keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
 .wrap{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:18px 16px 40px}
-h1{font-family:var(--hd);margin:6px 0 0 0;font-size:27px;font-weight:400;line-height:1.25;text-shadow:0 0 14px rgba(120,170,255,.55)}
+h1{font-family:var(--hd);margin:6px 0 0 0;font-size:23px;font-weight:400;line-height:1.25;text-shadow:0 0 14px rgba(120,170,255,.55)}
 .sub{color:var(--sub);font-size:14px;margin:4px 0 16px}
 .tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 .moons{display:flex;gap:6px;margin:24px 0 14px;align-items:flex-start}
@@ -30,12 +30,12 @@ h1{font-family:var(--hd);margin:6px 0 0 0;font-size:27px;font-weight:400;line-he
 .disc svg{width:100%;height:100%;overflow:visible}
 .mb.on .disc{filter:drop-shadow(0 0 8px rgba(200,225,255,.75)) drop-shadow(0 0 20px rgba(130,170,255,.45))}
 .mb .lab{font-size:15px;line-height:1.2}
-.mb .new{top:0;right:2px;animation:bl 1s steps(2,start) infinite;box-shadow:0 0 8px #ff4d79}
+.mb .new{top:0;right:2px;animation:bl 1.7s steps(2,start) infinite;box-shadow:0 0 8px #22c55e}
 button{font:inherit;font-family:var(--hd);cursor:pointer;position:relative;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 12px}
 button.on,button.pri{background:rgba(150,190,255,.2);color:#eaf2ff;border-color:rgba(170,205,255,.5);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 button.danger{color:#ff8a80}
 .badge{background:#e74c3c;color:#fff;border-radius:99px;padding:0 7px;font-size:12px;margin-left:4px}
-.new{position:absolute;top:-10px;right:-4px;background:#ff4d79;color:#fff;font-size:11px;line-height:1;padding:3px 6px;border-radius:99px}
+.new{position:absolute;top:-10px;right:-4px;background:#22c55e;color:#fff;font-size:11px;line-height:1;padding:3px 6px;border-radius:99px}
 .new.in{position:static;display:inline-block;margin-left:8px;vertical-align:middle}
 @keyframes bl{50%{opacity:.15}}
 textarea,input{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:rgba(10,15,40,.8);color:var(--ink)}
@@ -85,11 +85,11 @@ textarea{width:100%;min-height:110px}
 .memo{background-color:rgba(48,40,86,.35);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px 14px 18px;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.5px);background-size:16px 16px}
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .tl{flex:1;min-width:0}
-.cal{flex:0 0 auto;width:60px;text-align:center;background:rgba(22,31,70,.6);border:1px solid rgba(120,150,230,.45);border-radius:10px;overflow:hidden;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.cal{flex:0 0 auto;display:flex;align-items:stretch;text-align:center;background:rgba(22,31,70,.6);border:1px solid rgba(120,150,230,.45);border-radius:10px;overflow:hidden;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .calm{background:rgba(110,150,240,.5);font-size:11px;padding:1px 0}
 .cald{font-size:20px;line-height:1.1;margin-top:2px}
 .calw{font-size:10px;color:var(--sub)}
-.calv{border-top:1px dashed rgba(120,150,230,.45);margin-top:2px;padding:1px 0 2px;font-size:9px;color:#8fb8ff}
+.calL{width:50px}.calv{border-left:1px dashed rgba(120,150,230,.45);padding:0 9px;font-size:10px;color:#8fb8ff;display:flex;flex-direction:column;justify-content:center;line-height:1.25}.calv b{font-size:16px}
 .calv b{color:#ffd86b;font-weight:400}
 .shoot{position:absolute;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(190,220,255,.7) 60%,#fff);filter:drop-shadow(0 0 4px rgba(170,210,255,.9));opacity:0}
 .shoot::after{content:"";position:absolute;right:-2px;top:-2px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px rgba(190,220,255,.9)}
@@ -120,7 +120,7 @@ textarea{width:100%;min-height:110px}
 .tl2.sel{outline:2px solid rgba(220,235,255,.9);outline-offset:2px}
 .cdot{width:28px;height:28px;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.55)}
 .cdot.sel{outline:2px solid #fff;outline-offset:2px}
-.tree{width:100%;max-width:360px;display:block;margin:6px auto}
+.tree{width:100%;max-width:440px;display:block;margin:6px auto}
 .orn.me{filter:drop-shadow(0 0 5px #fff)}
 .abtns{display:flex;gap:10px;justify-content:center;margin:8px 0}
 .atxt{text-align:center;color:var(--sub);font-size:14px;margin:4px 0}
@@ -152,7 +152,16 @@ textarea{width:100%;min-height:110px}
 .chk.on{background:#5b8def}
 .pn .chk{top:0;left:0}
 button:disabled{opacity:.4}
-@media (prefers-reduced-motion:reduce){.star,.mb .new,.planet,.pup{animation:none}}
+@keyframes swy{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+.sw{transform-box:fill-box;transform-origin:50% 100%;animation:swy 6s ease-in-out infinite}
+.sw2{animation-duration:7.5s;animation-delay:-2s}.sw3{animation-duration:5s;animation-delay:-1s}
+.spk{transform-box:fill-box;transform-origin:center;animation:tw 2.4s ease-in-out infinite}
+.cork{display:block;height:560px;padding:0;overflow:hidden}
+.pn{position:absolute;filter:drop-shadow(0 3px 5px rgba(0,0,0,.28))}
+.pn.ghost{touch-action:none;cursor:grab;z-index:50!important;outline:2px dashed rgba(255,255,255,.9);outline-offset:8px}
+.tape{position:absolute;top:-9px;height:17px;z-index:3;opacity:.9;background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.6) 0 3px,transparent 3px 7px);box-shadow:0 1px 2px rgba(0,0,0,.15);clip-path:polygon(0 0,100% 0,97% 25%,100% 50%,97% 75%,100% 100%,0 100%,3% 75%,0 50%,3% 25%)}
+.sh-square{border-radius:22px}.sh-circle{border-radius:50%}.sh-paper{border-radius:4px}
+@media (prefers-reduced-motion:reduce){.star,.mb .new,.planet,.pup,.sw,.spk{animation:none}}
 </style>
 </head>
 <body>
@@ -249,7 +258,9 @@ const postKey=p=>p.n==null?"b-"+p.id:(p.cat?p.cat+"-"+p.n:String(p.n));
 const counterId=k=>k==="worry"?"counter":"counter_"+k;
 let seen={};try{seen=JSON.parse(localStorage.getItem("bm_seen")||"{}");}catch(e){}
 const saveSeen=()=>{try{const k=Object.keys(seen);if(k.length>600)k.slice(0,k.length-600).forEach(x=>delete seen[x]);localStorage.setItem("bm_seen",JSON.stringify(seen));}catch(e){}};
-let viewNew=new Set();
+let viewNew=new Set(),doorSeen={},placing=null,placeX=50,placeY=45;
+try{doorSeen=JSON.parse(localStorage.getItem("bm_door")||"{}");}catch(e){}
+const markDoor=k=>{doorSeen[k]=Date.now();try{localStorage.setItem("bm_door",JSON.stringify(doorSeen));}catch(e){}};
 const isNew=p=>p.ts&&Date.now()-p.ts<DAY&&!seen[p.id];
 function openPost(p){
   const cm=comments.filter(m=>m.postId===postKey(p));
@@ -288,8 +299,8 @@ function dkey(d){d=d||new Date();return `${d.getFullYear()}-${String(d.getMonth(
 function renderCal(){
   const c=document.getElementById("cal");if(!c)return;
   const d=new Date();c.innerHTML="";
-  const v=el("div","calv");v.append(document.createTextNode("TODAY "),el("b","",String(visitsN)));
-  c.append(el("div","calm",`${d.getMonth()+1}월`),el("div","cald",String(d.getDate())),el("div","calw",WD[d.getDay()]+"요일"),v);
+  const v=el("div","calv");v.append(document.createTextNode("TODAY"),el("b","",String(visitsN)));
+  const L=el("div","calL");L.append(el("div","calm",`${d.getMonth()+1}월`),el("div","cald",String(d.getDate())),el("div","calw",WD[d.getDay()]+"요일"));c.append(L,v);
 }
 (function shoot(){
   if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
@@ -322,9 +333,9 @@ function render(){
     if(d.k==="admin")label=(cat==="admin"?"🔓":"🔒")+label;
     const b=el("button","mb"+(cat===d.k?" on":""));
     const dc=el("span","disc");dc.innerHTML=doorSVG(cat===d.k,d.k);b.appendChild(dc);b.appendChild(el("span","lab",label));
-    const nw=d.k==="admin"?(isAdmin&&pending.length>0):(d.k==="board"||d.k==="worry")?posts.some(p=>catOf(p)===d.k&&isNew(p)):false;
+    const nw=d.k==="admin"?(isAdmin&&pending.length>0):(d.k==="board"||d.k==="worry")?posts.some(p=>catOf(p)===d.k&&isNew(p)&&p.ts>(doorSeen[d.k]||0)):false;
     if(nw)b.appendChild(el("span","new","NEW"));
-    b.onclick=()=>{cat=cat===d.k?null:d.k;selMode=false;sel.clear();showForm=false;if(cat==="board"){posts.filter(p=>catOf(p)==="board").forEach(p=>seen[p.id]=1);saveSeen();}sent=false;openKey=null;resetCompose();render();};
+    b.onclick=()=>{cat=cat===d.k?null:d.k;selMode=false;sel.clear();placing=null;showForm=false;if(cat==="board"||cat==="worry")markDoor(cat);sent=false;openKey=null;resetCompose();render();};
     $cats.appendChild(b);
   });
   document.title=isAdmin&&pending.length?`(${pending.length}) 블루문 대나무숲`:"블루문 대나무숲";
@@ -367,11 +378,14 @@ function crescentNum(id,num){
 }
 
 const SH=[
-  {k:"heart",n:"하트",c:"#ffc2d6",W:[270,250],pad:[27,20,28,20],fs:15,lines:4,max:80},
-  {k:"square",n:"네모",c:"#fff3a6",W:[260,210],pad:[14,14,14,14],fs:16,lines:8,max:200},
-  {k:"star",n:"별",c:"#cdeec0",W:[290,290],pad:[36,28,28,28],fs:14,lines:3,max:40},
-  {k:"moon",n:"달",c:"#cfe0ff",W:[270,270],pad:[24,36,20,16],fs:15,lines:4,max:70}
+  {k:"heart",n:"하트",c:"#ffd1e3",W:[250,232],pad:[27,20,28,20],fs:15,lines:4,max:80},
+  {k:"square",n:"네모",c:"#fff2bf",W:[240,200],pad:[14,14,14,14],fs:16,lines:8,max:200},
+  {k:"star",n:"별",c:"#e8defa",W:[270,270],pad:[36,28,28,28],fs:14,lines:3,max:40},
+  {k:"moon",n:"달",c:"#d5e6ff",W:[250,250],pad:[24,36,20,16],fs:15,lines:4,max:70},
+  {k:"circle",n:"동그라미",c:"#d8f3e4",W:[230,230],pad:[20,16,20,16],fs:15,lines:5,max:70},
+  {k:"paper",n:"그림 종이",c:"#ffffff",W:[240,240],pad:[10,10,10,10],fs:15,lines:4,max:60,draw:1}
 ];
+const PICK=[1,0,4,3,5];
 const PINS=["#ff5a5a","#4a90ff","#ffd23f","#46c37b","#f2f2f2"];
 const CRAYON=[["빨강","#e53935"],["주황","#fb8c00"],["노랑","#fdd835"],["초록","#43a047"],["파랑","#1e88e5"],["남색","#3949ab"],["보라","#8e24aa"],["검정","#212121"]];
 function resetCompose(){pickShape=null;composeText="";composeDraw=null;composeInk=false;drawMode=false;}
@@ -408,7 +422,7 @@ function renderComposer(){
   setupCanvas(cv);
   const pal=el("button","palbtn"+(drawMode?" on":""),"🎨");pal.setAttribute("aria-label","그림 그리기");
   pal.onclick=()=>{drawMode=!drawMode;render();};
-  wrap.append(box,pal);$main.appendChild(wrap);
+  wrap.appendChild(box);if(S.draw)wrap.appendChild(pal);$main.appendChild(wrap);
   if(drawMode){
     const tr=el("div","tools");
     const tb=(t,ico,lab)=>{const b=el("button","tl2"+(penTool===t?" sel":""),ico);b.setAttribute("aria-label",lab);b.onclick=()=>{penTool=t;render();};return b;};
@@ -419,59 +433,74 @@ function renderComposer(){
     $main.appendChild(tr);
   }
   const row=el("div","row");row.style.justifyContent="center";
-  const go=el("button","pri","붙이기"),cn=el("button","","취소");
+  const go=el("button","pri","붙일 자리 고르기"),cn=el("button","","취소");
   cn.onclick=()=>{resetCompose();render();};
   go.onclick=async()=>{
     const t=composeText.trim();
     if(!t&&!composeInk){alert("글이나 그림을 넣어주세요.");return;}
     const d={cat:"board",text:t,ts:Date.now(),shape:pickShape};
     if(composeInk&&composeDraw){if(composeDraw.length>280000){alert("그림이 너무 커요. 조금 지우고 다시 해주세요.");return;}d.draw=composeDraw;}
-    go.disabled=true;
-    try{await addDoc(collection(db,"posts"),d);resetCompose();sent=true;render();}
-    catch(e){go.disabled=false;alert("붙이지 못했어요. 다시 시도해주세요.");}
+    placing=d;placeX=50;placeY=45;render();
   };
   row.append(go,cn);$main.appendChild(row);
 }
 
-function petSVG(i){
-  const T=[["#ffb86b",'<path d="M6 13L7 2L15 7ZM26 13L25 2L17 7Z" fill="#ffb86b"/>'],
-   ["#c98b5b",'<circle cx="7" cy="7" r="4.5" fill="#c98b5b"/><circle cx="25" cy="7" r="4.5" fill="#c98b5b"/>'],
-   ["#fff6f0",'<ellipse cx="11" cy="5" rx="3" ry="7.5" fill="#fff6f0"/><ellipse cx="21" cy="5" rx="3" ry="7.5" fill="#fff6f0"/><ellipse cx="11" cy="6" rx="1.4" ry="5" fill="#ffc0d0"/><ellipse cx="21" cy="6" rx="1.4" ry="5" fill="#ffc0d0"/>'],
-   ["#fff",'<circle cx="7" cy="7" r="4.5" fill="#333"/><circle cx="25" cy="7" r="4.5" fill="#333"/>'],
-   ["#ffcf8a",'<circle cx="7" cy="8" r="4" fill="#ffcf8a"/><circle cx="25" cy="8" r="4" fill="#ffcf8a"/><circle cx="7" cy="8" r="2" fill="#ffb3c0"/><circle cx="25" cy="8" r="2" fill="#ffb3c0"/>']][i];
-  const pa=i===3?'<ellipse cx="11.5" cy="15.5" rx="3.2" ry="3.8" fill="#333"/><ellipse cx="20.5" cy="15.5" rx="3.2" ry="3.8" fill="#333"/><circle cx="11.5" cy="15" r="1.3" fill="#fff"/><circle cx="20.5" cy="15" r="1.3" fill="#fff"/>':'<circle cx="12" cy="15" r="1.7" fill="#333"/><circle cx="20" cy="15" r="1.7" fill="#333"/>';
-  return `<svg viewBox="0 0 32 36" aria-hidden="true"><path d="M16 26v8" stroke="#b8bcc8" stroke-width="2.2" stroke-linecap="round"/>${T[1]}<circle cx="16" cy="16" r="11" fill="${T[0]}"/>${pa}<circle cx="9" cy="19.5" r="2" fill="#ff9fb0" opacity=".7"/><circle cx="23" cy="19.5" r="2" fill="#ff9fb0" opacity=".7"/><ellipse cx="16" cy="18.6" rx="1.4" ry="1" fill="#6b4a3a"/><path d="M14.4 20.2q1.6 1.7 3.2 0" stroke="#6b4a3a" fill="none" stroke-width="1.1" stroke-linecap="round"/></svg>`;
-}
-function boardNote(p){
+const TAPEC=["#ffd6e6","#cfe8ff","#d8f5d0","#fff0b3","#e5d8ff","#ffe0c2"];
+function boardNote(p,ghost){
   const si=typeof p.shape==="number"&&SH[p.shape]?p.shape:1,S=SH[si],id=p.id,len=(p.text||"").length;
-  let w=len<=12?92:len<=36?112:len<=80?134:154;if(S.k==="star")w+=24;if(S.k==="moon")w+=10;
+  let w=len<=12?92:len<=36?112:len<=80?134:154;if(S.k==="star")w+=24;if(S.k==="moon"||S.k==="circle")w+=12;if(S.k==="paper")w=124;
   const legacy=typeof p.shape!=="number"&&typeof p.color==="number"&&PCOL[p.color]?PCOL[p.color].c:null;
-  const wrap=el("div","pn");
-  wrap.style.cssText=`margin:${hash(id)%18}px ${(hash(id+"m")%14)-4}px ${hash(id+"b")%10}px;transform:rotate(${(hash(id+"r")%17)-8}deg) translate(${(hash(id+"x")%9)-4}px,${(hash(id+"y")%9)-4}px);z-index:${1+hash(id+"z")%5}`;
-  const pin=el("span","pin");pin.innerHTML=petSVG(hash(id+"c")%5);pin.style.left=(34+(hash(id+"p")%32))+"%";
+  const x=typeof p.px==="number"?p.px:22+hash(id+"x")%56,y=typeof p.py==="number"?p.py:16+hash(id+"y")%66;
+  const wrap=el("div","pn"+(ghost?" ghost":""));
+  wrap.style.cssText=`left:${x}%;top:${y}%;transform:translate(-50%,-50%) rotate(${(hash(id+"r")%9)-4}deg);z-index:${1+hash(id+"z")%5}`;
+  const tp=el("span","tape");tp.style.cssText=`left:${38+hash(id+"p")%24}%;width:${46+hash(id+"w")%18}px;margin-left:-26px;transform:rotate(${(hash(id+"t")%21)-10}deg);background-color:${TAPEC[hash(id+"c")%TAPEC.length]}`;
   const f=el("div","pf sh-"+S.k);
   f.style.cssText=`width:${w}px;background:${legacy||S.c};`+(S.k==="square"?`min-height:${Math.round(w*.62)}px;padding:16px 14px 18px`:`aspect-ratio:${S.k==="heart"?"1/0.93":"1/1"};padding:${S.pad[0]}% ${S.pad[1]}% ${S.pad[2]}% ${S.pad[3]}%`);
   const t=el("div","ptxt",p.text||"");t.style.cssText=`font-size:${S.fs-2}px;-webkit-line-clamp:${S.lines}`;
   f.appendChild(t);
   if(p.draw){const im=el("img","pdraw");im.src=p.draw;im.alt="";f.appendChild(im);}
-  wrap.append(pin,f);
-  
-  if(isAdmin&&selMode)wrap.appendChild(chk(p));wrap.onclick=()=>{if(isAdmin&&selMode)selTog(p);else openPost(p);};
+  wrap.append(tp,f);
+  if(!ghost){if(isAdmin&&selMode)wrap.appendChild(chk(p));wrap.onclick=()=>{if(isAdmin&&selMode)selTog(p);else openPost(p);};}
   return wrap;
 }
+function renderPlace(){
+  $main.appendChild(el("div","pickhead","포스트잇을 끌어서 붙일 곳에 놓고 아래 버튼을 눌러요"));
+  const row=el("div","row");row.style.cssText="margin:0 0 12px;justify-content:center";
+  const ok=el("button","pri","✔ 여기에 붙이기"),no=el("button","","취소");
+  ok.onclick=async()=>{ok.disabled=true;try{await addDoc(collection(db,"posts"),{...placing,px:placeX,py:placeY});placing=null;resetCompose();sent=true;render();}catch(e){ok.disabled=false;alert("붙이지 못했어요. 다시 시도해주세요.");}};
+  no.onclick=()=>{placing=null;render();};
+  row.append(ok,no);$main.appendChild(row);
+  const g=el("div","cork");
+  posts.filter(p=>catOf(p)==="board").forEach(p=>g.appendChild(boardNote(p)));
+  const gh=boardNote({...placing,id:"ghost"+placing.ts},true);gh.style.left=placeX+"%";gh.style.top=placeY+"%";
+  g.appendChild(gh);$main.appendChild(g);
+  const move=e=>{
+    const r=g.getBoundingClientRect(),iw=g.clientWidth,ih=g.clientHeight;
+    const mx=gh.offsetWidth/2/iw*100,my=gh.offsetHeight/2/ih*100;
+    placeX=Math.min(100-mx,Math.max(mx,(e.clientX-r.left-g.clientLeft)/iw*100));
+    placeY=Math.min(100-my,Math.max(my,(e.clientY-r.top-g.clientTop)/ih*100));
+    gh.style.left=placeX+"%";gh.style.top=placeY+"%";
+  };
+  let dr=false;
+  gh.onpointerdown=e=>{dr=true;drawing=true;try{gh.setPointerCapture(e.pointerId);}catch(_){}e.preventDefault();};
+  gh.onpointermove=e=>{if(dr)move(e);};
+  const up=()=>{if(!dr)return;dr=false;drawing=false;if(dirty){dirty=false;render();}};
+  gh.onpointerup=up;gh.onpointercancel=up;
+  g.onclick=e=>{if(!gh.contains(e.target))move(e);};
+}
 
-const SLOTS=(()=>{const a=[];for(let i=0;i<30;i++){const r=Math.sqrt((i+.6)/30.4),t=i*2.39996;a.push([160+116*r*Math.cos(t),106+76*r*Math.sin(t)]);}return a;})();
+const SLOTS=(()=>{const a=[];for(let i=0;i<30;i++){const r=Math.sqrt((i+.6)/30.4),t=i*2.39996;a.push([160+120*r*Math.cos(t),116+86*r*Math.sin(t)]);}return a;})();
 function renderAttend(){
   const today=dkey(),list=attend.filter(a=>a.d===today).sort((a,b)=>a.ts-b.ts);
   const me=auth&&auth.currentUser?auth.currentUser.uid:null;
   const mine=me?list.find(a=>a.id===today+"_"+me):null;
-  let sv='<svg viewBox="0 0 320 300" class="tree" aria-label="출석 나무"><path d="M160 208L302 250L160 290L18 250Z" fill="#1c1744"/><path d="M18 250L160 290V300L18 260Z" fill="#0e0b27"/><path d="M302 250L160 290V300L302 260Z" fill="#151136"/><circle cx="60" cy="250" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="90" cy="262" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="120" cy="240" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="200" cy="236" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="230" cy="258" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="265" cy="248" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="150" cy="274" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="185" cy="268" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="110" cy="270" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="245" cy="242" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="75" cy="238" r="1.2" fill="#cfd8ff" opacity=".8"/><circle cx="210" cy="278" r="1.2" fill="#cfd8ff" opacity=".8"/><path d="M147 254Q152 220 154 188L166 188Q168 220 173 254Q160 260 147 254Z" fill="#8a6a4a"/><ellipse cx="160" cy="234" rx="5" ry="7" fill="#8ff0df"/><circle cx="80" cy="224" r="17" fill="#7fd9c8"/><circle cx="98" cy="214" r="13" fill="#7fd9c8"/><circle cx="68" cy="232" r="11" fill="#7fd9c8"/><circle cx="238" cy="228" r="16" fill="#7fd9c8"/><circle cx="222" cy="218" r="12" fill="#7fd9c8"/><circle cx="252" cy="236" r="11" fill="#7fd9c8"/><circle cx="86" cy="230" r="10" fill="#5cc2b0"/><circle cx="240" cy="234" r="10" fill="#5cc2b0"/><circle cx="70" cy="122" r="38" fill="#3a63b0"/><circle cx="250" cy="122" r="38" fill="#3a63b0"/><circle cx="160" cy="58" r="46" fill="#3a63b0"/><circle cx="108" cy="70" r="40" fill="#3a63b0"/><circle cx="212" cy="70" r="40" fill="#3a63b0"/><circle cx="160" cy="130" r="60" fill="#3a63b0"/><circle cx="100" cy="102" r="34" fill="#5b8def"/><circle cx="220" cy="102" r="34" fill="#5b8def"/><circle cx="160" cy="96" r="52" fill="#5b8def"/><circle cx="125" cy="142" r="34" fill="#5b8def"/><circle cx="195" cy="142" r="34" fill="#5b8def"/><circle cx="58" cy="142" r="26" fill="#5b8def"/><circle cx="262" cy="142" r="26" fill="#5b8def"/><circle cx="130" cy="54" r="28" fill="#5b8def"/><circle cx="190" cy="54" r="28" fill="#5b8def"/><circle cx="160" cy="28" r="22" fill="#5b8def"/><circle cx="112" cy="92" r="8" fill="#7aa6f5"/><circle cx="210" cy="120" r="8" fill="#7aa6f5"/><circle cx="90" cy="138" r="7" fill="#7aa6f5"/><circle cx="236" cy="86" r="6" fill="#7aa6f5"/><circle cx="150" cy="60" r="7" fill="#7aa6f5"/><ellipse cx="82" cy="84" rx="14" ry="8" transform="rotate(-25 82 84)" fill="#8ff0df"/><ellipse cx="104" cy="90" rx="14" ry="8" transform="rotate(25 104 90)" fill="#8ff0df"/><circle cx="93" cy="88" r="5" fill="#5cc2b0"/><path d="M236 34a19 19 0 1 0 16 30a15 15 0 1 1-16-30z" fill="#ffd86b"/><text x="60" y="60" font-size="11" fill="#bff5ea" text-anchor="middle">✦</text><text x="262" y="100" font-size="9" fill="#ffe3a8" text-anchor="middle">✦</text><text x="140" y="22" font-size="9" fill="#bff5ea" text-anchor="middle">✦</text><text x="40" y="110" font-size="8" fill="#ffe3a8" text-anchor="middle">✦</text><text x="285" y="60" font-size="10" fill="#bff5ea" text-anchor="middle">✦</text><circle cx="196" cy="262" r="12" fill="#7fd9c8"/><circle cx="210" cy="268" r="9" fill="#5cc2b0"/><circle cx="184" cy="268" r="8" fill="#8ff0df"/>';
+  let sv='<svg viewBox="0 0 320 300" class="tree" aria-label="출석 나무"><defs><linearGradient id="tg0" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#6fa0f0"/><stop offset="1" stop-color="#2745a8"/></linearGradient><linearGradient id="tg1" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#9cc8ff"/><stop offset="1" stop-color="#3f70e0"/></linearGradient><linearGradient id="tg2" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#d6ecff"/><stop offset="1" stop-color="#6a9bf5"/></linearGradient></defs><path d="M138 300C148 272 152 240 150 196L170 196C168 240 172 272 182 300Z" fill="#6e5a4a"/><path d="M160 220C150 190 120 172 100 150M160 220C172 190 205 172 222 148M160 215V140" stroke="#6e5a4a" stroke-width="7" fill="none" stroke-linecap="round"/><g class="sw sw1"><circle cx="139" cy="144" r="35" fill="url(#tg0)"/><circle cx="239" cy="142" r="31" fill="url(#tg0)"/><circle cx="240" cy="137" r="27" fill="url(#tg0)"/><circle cx="131" cy="125" r="27" fill="url(#tg0)"/><circle cx="63" cy="150" r="28" fill="url(#tg0)"/><circle cx="176" cy="180" r="39" fill="url(#tg0)"/><circle cx="93" cy="92" r="40" fill="url(#tg0)"/><circle cx="266" cy="138" r="30" fill="url(#tg0)"/><circle cx="185" cy="138" r="30" fill="url(#tg0)"/><circle cx="181" cy="84" r="34" fill="url(#tg0)"/><circle cx="113" cy="78" r="34" fill="url(#tg0)"/><circle cx="187" cy="124" r="29" fill="url(#tg0)"/><circle cx="127" cy="67" r="30" fill="url(#tg0)"/><circle cx="91" cy="88" r="30" fill="url(#tg0)"/><circle cx="188" cy="50" r="29" fill="url(#tg0)"/><circle cx="82" cy="89" r="38" fill="url(#tg0)"/><circle cx="152" cy="72" r="40" fill="url(#tg0)"/><circle cx="217" cy="152" r="37" fill="url(#tg0)"/><circle cx="208" cy="163" r="27" fill="url(#tg0)"/><circle cx="108" cy="54" r="34" fill="url(#tg0)"/><circle cx="208" cy="84" r="36" fill="url(#tg0)"/><circle cx="84" cy="81" r="32" fill="url(#tg0)"/><circle cx="222" cy="49" r="33" fill="url(#tg0)"/><circle cx="145" cy="99" r="36" fill="url(#tg0)"/><circle cx="88" cy="51" r="38" fill="url(#tg0)"/><circle cx="144" cy="166" r="35" fill="url(#tg0)"/></g><g class="sw sw2"><circle cx="241" cy="124" r="22" fill="url(#tg1)"/><circle cx="182" cy="130" r="29" fill="url(#tg1)"/><circle cx="201" cy="146" r="25" fill="url(#tg1)"/><circle cx="184" cy="99" r="25" fill="url(#tg1)"/><circle cx="53" cy="92" r="30" fill="url(#tg1)"/><circle cx="202" cy="83" r="25" fill="url(#tg1)"/><circle cx="89" cy="177" r="31" fill="url(#tg1)"/><circle cx="189" cy="145" r="23" fill="url(#tg1)"/><circle cx="169" cy="174" r="27" fill="url(#tg1)"/><circle cx="159" cy="121" r="25" fill="url(#tg1)"/><circle cx="98" cy="162" r="31" fill="url(#tg1)"/><circle cx="129" cy="60" r="27" fill="url(#tg1)"/><circle cx="148" cy="99" r="31" fill="url(#tg1)"/><circle cx="181" cy="39" r="30" fill="url(#tg1)"/><circle cx="101" cy="149" r="21" fill="url(#tg1)"/><circle cx="140" cy="100" r="21" fill="url(#tg1)"/><circle cx="172" cy="149" r="24" fill="url(#tg1)"/><circle cx="162" cy="116" r="22" fill="url(#tg1)"/><circle cx="218" cy="146" r="20" fill="url(#tg1)"/><circle cx="226" cy="69" r="22" fill="url(#tg1)"/><circle cx="159" cy="166" r="24" fill="url(#tg1)"/><circle cx="239" cy="170" r="32" fill="url(#tg1)"/><circle cx="78" cy="128" r="21" fill="url(#tg1)"/><circle cx="216" cy="145" r="23" fill="url(#tg1)"/><circle cx="183" cy="86" r="20" fill="url(#tg1)"/><circle cx="243" cy="97" r="22" fill="url(#tg1)"/><circle cx="141" cy="112" r="26" fill="url(#tg1)"/><circle cx="270" cy="105" r="28" fill="url(#tg1)"/><circle cx="155" cy="167" r="22" fill="url(#tg1)"/><circle cx="172" cy="55" r="29" fill="url(#tg1)"/></g><g class="sw sw3"><circle cx="133" cy="152" r="22" fill="url(#tg2)"/><circle cx="270" cy="108" r="22" fill="url(#tg2)"/><circle cx="203" cy="49" r="16" fill="url(#tg2)"/><circle cx="89" cy="110" r="14" fill="url(#tg2)"/><circle cx="222" cy="124" r="17" fill="url(#tg2)"/><circle cx="119" cy="37" r="18" fill="url(#tg2)"/><circle cx="270" cy="83" r="24" fill="url(#tg2)"/><circle cx="123" cy="146" r="16" fill="url(#tg2)"/><circle cx="178" cy="153" r="20" fill="url(#tg2)"/><circle cx="249" cy="70" r="19" fill="url(#tg2)"/><circle cx="99" cy="53" r="15" fill="url(#tg2)"/><circle cx="99" cy="47" r="22" fill="url(#tg2)"/><circle cx="160" cy="57" r="16" fill="url(#tg2)"/><circle cx="177" cy="68" r="22" fill="url(#tg2)"/><circle cx="234" cy="106" r="18" fill="url(#tg2)"/><circle cx="257" cy="92" r="16" fill="url(#tg2)"/><circle cx="193" cy="140" r="23" fill="url(#tg2)"/><circle cx="176" cy="85" r="22" fill="url(#tg2)"/><circle cx="257" cy="107" r="18" fill="url(#tg2)"/><circle cx="119" cy="107" r="14" fill="url(#tg2)"/><circle cx="255" cy="103" r="19" fill="url(#tg2)"/><circle cx="232" cy="93" r="23" fill="url(#tg2)"/><circle cx="185" cy="81" r="17" fill="url(#tg2)"/><circle cx="144" cy="157" r="20" fill="url(#tg2)"/><circle cx="155" cy="172" r="15" fill="url(#tg2)"/><circle cx="220" cy="89" r="19" fill="url(#tg2)"/><circle cx="61" cy="75" r="18" fill="url(#tg2)"/><circle cx="234" cy="86" r="19" fill="url(#tg2)"/><g transform="translate(245 167)"><path class="spk" style="animation-delay:0.0s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(210 59)"><path class="spk" style="animation-delay:1.7s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(93 55)"><path class="spk" style="animation-delay:0.3s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(161 72)"><path class="spk" style="animation-delay:1.5s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(165 144)"><path class="spk" style="animation-delay:1.8s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(76 137)"><path class="spk" style="animation-delay:1.6s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(236 67)"><path class="spk" style="animation-delay:2.8s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(104 47)"><path class="spk" style="animation-delay:0.4s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(122 139)"><path class="spk" style="animation-delay:0.2s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(180 182)"><path class="spk" style="animation-delay:2.1s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(220 100)"><path class="spk" style="animation-delay:0.7s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(68 112)"><path class="spk" style="animation-delay:2.5s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(117 167)"><path class="spk" style="animation-delay:0.6s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(148 112)"><path class="spk" style="animation-delay:1.3s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(152 111)"><path class="spk" style="animation-delay:0.2s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(188 167)"><path class="spk" style="animation-delay:0.8s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(164 148)"><path class="spk" style="animation-delay:1.3s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g><g transform="translate(207 150)"><path class="spk" style="animation-delay:2.8s" d="M0-6Q1-1 6 0Q1 1 0 6Q-1 1-6 0Q-1-1 0-6Z" fill="#fff"/></g>';
   SLOTS.forEach((p,i)=>{
     const a=list[i],x=p[0].toFixed(1),y=p[1].toFixed(1);
     if(a){sv+=`<line x1="${x}" y1="${(p[1]-15).toFixed(1)}" x2="${x}" y2="${(p[1]-8).toFixed(1)}" stroke="#e8f0ff" stroke-width="1"/><text x="${x}" y="${(p[1]+6).toFixed(1)}" font-size="17" text-anchor="middle" class="orn${a.id===today+"_"+me?" me":""}">${a.kind==="moon"?"🌙":"⭐"}</text>`;}
     else sv+=`<circle cx="${x}" cy="${y}" r="5.5" fill="none" stroke="rgba(255,255,255,.3)" stroke-dasharray="2 2"/>`;
   });
-  sv+="</svg>";
+  sv+="</g></svg>";
   const d=new Date();
   $main.appendChild(el("div","pickhead",`오늘(${d.getMonth()+1}월 ${d.getDate()}일)의 출석 나무 🌳`));
   const holder=el("div");holder.innerHTML=sv;$main.appendChild(holder);
@@ -483,7 +512,7 @@ function renderAttend(){
     const m=el("button","pri","🌙 달 달기"),st=el("button","pri","⭐ 별 달기");m.onclick=hang("moon");st.onclick=hang("star");bt.append(m,st);
   }
   $main.appendChild(bt);
-  $main.appendChild(el("div","atxt","하고 싶은 사람만 재미로 달아요 🙂"));
+  $main.appendChild(el("div","atxt","달이나 별 중 하나만, 하루에 한 번 달 수 있어요 🙂"));
 }
 
 function renderBoard(){
@@ -498,7 +527,8 @@ function renderBoard(){
     }
     openKey=null;
   }
-  if(sent)$main.appendChild(el("div","msg",isW?"접수됐어요! 관리자가 확인한 뒤 올라가요.":"메모판에 붙였어요! 📌"));
+  if(sent)$main.appendChild(el("div","msg",isW?"접수됐어요! 관리자가 확인한 뒤 올라가요.":"메모판에 붙였어요! 🎀"));
+  if(!isW&&placing){renderPlace();return;}
   if(isW){
     const btn=el("button","pri",showForm?"닫기":ci.write);
     btn.onclick=()=>{showForm=!showForm;sent=false;render();};
@@ -518,11 +548,11 @@ function renderBoard(){
   }else{
     $main.appendChild(el("div","pickhead","포스트잇을 골라보세요"));
     const sw=el("div","swatches");
-    SH.forEach((S,i)=>{
+    PICK.forEach(i=>{const S=SH[i];
       const b=el("button","sw"+(pickShape===i?" sel":""));
       const f=el("span","swf sh-"+S.k);f.style.background=S.c;b.appendChild(f);
       b.setAttribute("aria-label",S.n+" 메모지");b.title=S.n;
-      b.onclick=()=>{pickShape=pickShape===i?null:i;drawMode=false;sent=false;render();};
+      b.onclick=()=>{pickShape=pickShape===i?null:i;drawMode=false;composeDraw=null;composeInk=false;sent=false;render();};
       sw.appendChild(b);
     });
     $main.appendChild(sw);
