@@ -136,6 +136,11 @@ textarea{width:100%;min-height:110px}
 .mn svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 6px rgba(120,170,255,.65))}
 .mn .new{top:-2px;right:0}
 .empty{color:var(--sub);text-align:center;padding:30px 0}
+.rules{margin:26px 0 10px;padding:18px 18px 14px;border-radius:18px;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.25);text-align:left}
+.rtitle{font-size:20px;color:#e8f0ff;margin-bottom:8px}
+.rh1{font-size:15px;color:#e8f0ff;margin-top:12px;word-break:keep-all}
+.rb{font-size:14px;color:#aebce8;margin-top:4px;white-space:pre-wrap;line-height:1.6;word-break:keep-all}
+.rzh{position:absolute;left:50%;bottom:-9px;margin-left:-8px;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.88);border:2px solid #5b8def;z-index:4;touch-action:none;opacity:.85}
 .hintdoor{font-size:19px;padding:52px 0 30px}
 .atthead{font-size:18px;font-weight:600;color:#dbe8ff;text-align:left;margin:6px 0 4px;text-shadow:0 0 12px rgba(91,141,239,.6)}
 .halo{animation:halo 2.4s ease-in-out infinite}
@@ -192,8 +197,8 @@ function setMoon(k){var m=document.getElementById("gmoon"),t=document.getElement
 function msg(t,c){var m=document.getElementById("gmsg");if(m){m.textContent=t;m.style.color=c||"#bcd2ff";}}
 window.__gate={msg:msg,ready:function(){if(ready)return;ready=true;clearInterval(fill);setMoon(1);setTimeout(function(){g.classList.add("out");setTimeout(function(){g.remove();},500);},450);}};
 function load(){
-  g.innerHTML='<div class="gbox"><svg viewBox="-56 -56 112 112" width="124" height="124" style="margin:0 auto;display:block"><defs><radialGradient id="gg"><stop offset=".55" stop-color="#6aa0ff" stop-opacity=".35"/><stop offset="1" stop-color="#6aa0ff" stop-opacity="0"/></radialGradient><linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="-30" y1="-36" x2="34" y2="40"><stop offset="0" stop-color="#f0f9ff"/><stop offset=".35" stop-color="#9fd0ff"/><stop offset=".7" stop-color="#4f86f5"/><stop offset="1" stop-color="#5a46d8"/></linearGradient><filter id="gf" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter></defs><circle r="54" fill="url(#gg)"/><circle r="40" fill="rgba(110,160,255,.07)" stroke="rgba(150,190,255,.3)" stroke-width="1"/><path id="gmoon2" fill="#6aa0ff" opacity=".8" filter="url(#gf)" d=""/><path id="gmoon" fill="url(#gl)" d=""/></svg><div class="gtxt">대나무숲으로 들어가는중 <span class="dots"><i>•</i><i>•</i><i>•</i></span></div><div id="gpct" style="color:#8fb8ff;font-size:14px">0%</div><div class="gerr" id="gmsg"></div></div>';
-  var t0=Date.now();setMoon(0);fill=setInterval(function(){if(!ready)setMoon(Math.min(.92,1-Math.exp(-(Date.now()-t0)/2500)));},60);
+  g.innerHTML='<div class="gbox"><svg viewBox="-56 -56 112 112" width="124" height="124" style="margin:0 auto;display:block"><defs><radialGradient id="gg"><stop offset=".55" stop-color="#6aa0ff" stop-opacity=".35"/><stop offset="1" stop-color="#6aa0ff" stop-opacity="0"/></radialGradient><linearGradient id="gl" gradientUnits="userSpaceOnUse" x1="-30" y1="-36" x2="34" y2="40"><stop offset="0" stop-color="#f0f9ff"/><stop offset=".35" stop-color="#9fd0ff"/><stop offset=".7" stop-color="#4f86f5"/><stop offset="1" stop-color="#5a46d8"/></linearGradient><filter id="gf" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter></defs><circle r="54" fill="url(#gg)"/><circle r="40" fill="rgba(110,160,255,.07)" stroke="rgba(150,190,255,.3)" stroke-width="1"/><path id="gmoon2" fill="#6aa0ff" opacity=".8" filter="url(#gf)" d=""/><path id="gmoon" fill="url(#gl)" d=""/></svg><div class="gtxt">대나무숲으로 들어가는중 <span class="dots"><i>•</i><i>•</i><i>•</i></span></div><div id="gpct" style="color:#8fb8ff;font-size:14px">0%</div><div style="color:#8fa3d6;font-size:13px;line-height:1.6;margin-top:6px">로그인이나 개인정보 수집 없이<br>철저히 익명으로 이루어져요 🌙</div><div class="gerr" id="gmsg"></div></div>';
+  var t0=Date.now();setMoon(0);fill=setInterval(function(){if(!ready)setMoon(Math.min(.92,1-Math.exp(-(Date.now()-t0)/2500)));},60);setTimeout(function(){if(!ready)msg("조금 오래 걸리고 있어요. 앱을 나갔다가 다시 들어와주세요 🌙");},7000);
   
   res();
 }
@@ -295,7 +300,7 @@ const postKey=p=>p.n==null?"b-"+p.id:(p.cat?p.cat+"-"+p.n:String(p.n));
 const counterId=k=>k==="worry"?"counter":"counter_"+k;
 let seen={};try{seen=JSON.parse(localStorage.getItem("bm_seen")||"{}");}catch(e){}
 const saveSeen=()=>{try{const k=Object.keys(seen);if(k.length>600)k.slice(0,k.length-600).forEach(x=>delete seen[x]);localStorage.setItem("bm_seen",JSON.stringify(seen));}catch(e){}};
-let viewNew=new Set(),doorSeen={},placing=null,placeX=50,placeY=45;
+let viewNew=new Set(),doorSeen={},placing=null,placeX=50,placeY=45,inboxPrev=null;
 try{doorSeen=JSON.parse(localStorage.getItem("bm_door")||"{}");}catch(e){}
 const markDoor=k=>{doorSeen[k]=Date.now();try{localStorage.setItem("bm_door",JSON.stringify(doorSeen));}catch(e){}};
 const isNew=p=>p.ts&&Date.now()-p.ts<DAY&&!seen[p.id];
@@ -369,9 +374,9 @@ function render(){
     if(d.k==="admin")label=(cat==="admin"?"🔓":"🔒")+label;
     const b=el("button","mb"+(cat===d.k?" on":""));
     const dc=el("span","disc");dc.innerHTML=doorSVG(cat===d.k,d.k);b.appendChild(dc);b.appendChild(el("span","lab",label));
-    const nw=d.k==="admin"?(isAdmin&&pending.length>0):(d.k==="board"||d.k==="worry")?posts.some(p=>catOf(p)===d.k&&isNew(p)&&p.ts>(doorSeen[d.k]||0)):false;
+    const nw=d.k==="admin"?(isAdmin&&pending.some(r=>r.ts>(doorSeen.inbox||0))):(d.k==="board"||d.k==="worry")?posts.some(p=>catOf(p)===d.k&&isNew(p)&&p.ts>(doorSeen[d.k]||0)):false;
     if(nw)b.appendChild(el("span","new","NEW"));
-    b.onclick=()=>{cat=cat===d.k?null:d.k;selMode=false;sel.clear();placing=null;showForm=false;if(cat==="board"||cat==="worry")markDoor(cat);sent=false;openKey=null;resetCompose();render();};
+    b.onclick=()=>{cat=cat===d.k?null:d.k;selMode=false;sel.clear();placing=null;inboxPrev=null;showForm=false;if(cat==="board"||cat==="worry")markDoor(cat);if(cat==="admin"){inboxPrev=doorSeen.inbox||0;markDoor("inbox");}sent=false;openKey=null;resetCompose();render();};
     $cats.appendChild(b);
   });
   document.title=isAdmin&&pending.length?`(${pending.length}) 블루문 대나무숲`:"블루문 대나무숲";
@@ -393,7 +398,7 @@ function renderAdmin(){
   }
   const t=el("div","tabs");
   const tb=(k,l,n,nw)=>{const b=el("button",adminTab===k?"on":"",l);if(n)b.appendChild(el("span","badge",String(n)));if(nw)b.appendChild(el("span","new","NEW"));b.onclick=()=>{adminTab=k;render();};t.appendChild(b);};
-  tb("review","📥 검수함",pending.length,pending.length>0);
+  tb("review","📥 검수함",pending.length,inboxPrev!==null&&pending.some(r=>r.ts>inboxPrev));
   tb("trash","🗑️ 휴지통",trash.length,false);
   $main.appendChild(t);
   if(adminTab==="review")renderReview();else renderTrash();
@@ -449,7 +454,7 @@ function renderComposer(){
   const box=el("div","pf composer sh-"+S.k+(drawMode?" drawing":""));
   box.style.cssText=`aspect-ratio:${S.W[0]}/${S.W[1]};background:${S.c};width:${S.W[0]}px;max-width:100%`;
   const inn=el("div","cin");inn.style.padding=`${S.pad[0]}% ${S.pad[1]}% ${S.pad[2]}% ${S.pad[3]}%`;
-  const ta=el("textarea","cta");ta.placeholder="여기에 적어보세요";ta.maxLength=S.max;ta.value=composeText;
+  const ta=el("textarea","cta");ta.placeholder=S.k==="paper"?"그림을 그릴 수 있는 도화지예요":"여기에 적어보세요";ta.maxLength=S.max;ta.value=composeText;
   ta.oninput=()=>{composeText=ta.value;};
   inn.appendChild(ta);
   const cv=el("canvas","cvs");cv.width=S.W[0];cv.height=S.W[1];
@@ -497,9 +502,20 @@ function boardNote(p,ghost){
   const t=el("div","ptxt",p.text||"");t.style.cssText=`font-size:${((S.fs-2)*fk*kz).toFixed(1)}px`;
   f.appendChild(t);
   if(p.draw){const im=el("img","pdraw");im.src=p.draw;im.alt="";f.appendChild(im);}
+  const fit=()=>{if(!f.isConnected||S.k==="square")return;const tg=S.k==="heart"?.93:1;let fs=parseFloat(t.style.fontSize),n=0;while(f.offsetHeight>f.offsetWidth*tg*1.03&&fs>6&&n++<40){fs-=.5;t.style.fontSize=fs+"px";}};
+  wrap._fit=fit;requestAnimationFrame(fit);
   wrap._w=w/kz;wrap._fs=(S.fs-2)*fk;wrap._sq=S.k==="square";wrap.append(tp,f);
   if(!ghost){
     if(isAdmin&&selMode)wrap.appendChild(chk(p));
+    if(!(isAdmin&&selMode)){
+      const rz=el("span","rzh");let rs=false,c0,d0,k0,kk=kz;
+      rz.onclick=e=>e.stopPropagation();
+      rz.onpointerdown=e=>{e.stopPropagation();e.preventDefault();const r=f.getBoundingClientRect();c0={x:r.left+r.width/2,y:r.top+r.height/2};d0=Math.hypot(e.clientX-c0.x,e.clientY-c0.y)||1;k0=kz;kk=kz;rs=true;drawing=true;try{rz.setPointerCapture(e.pointerId);}catch(_){}};
+      rz.onpointermove=e=>{if(!rs)return;kk=Math.min(2,Math.max(.5,k0*Math.hypot(e.clientX-c0.x,e.clientY-c0.y)/d0));f.style.width=Math.round(wrap._w*kk)+"px";if(wrap._sq)f.style.minHeight=Math.round(wrap._w*kk*.62)+"px";t.style.fontSize=((S.fs-2)*fk*kk).toFixed(1)+"px";fit();};
+      const rend=async()=>{if(!rs)return;rs=false;drawing=false;try{await updateDoc(doc(db,"posts",p.id),{sz:Math.round(kk*100)/100});}catch(er){alert("크기를 바꾸지 못했어요.");render();}if(dirty){dirty=false;render();}};
+      rz.onpointerup=rz.onpointercancel=rend;
+      wrap.appendChild(rz);
+    }
     wrap.style.touchAction="none";
     let st=null,mvd=false,lx=0,ly=0;
     wrap.onpointerdown=e=>{if(isAdmin&&selMode)return;st={x:e.clientX,y:e.clientY};mvd=false;};
@@ -555,7 +571,7 @@ function renderPlace(){
   const size=(n,k)=>{
     const f=n.querySelector(".pf"),t=n.querySelector(".ptxt");
     f.style.width=Math.round(n._w*k)+"px";if(n._sq)f.style.minHeight=Math.round(n._w*k*.62)+"px";
-    t.style.fontSize=(n._fs*k).toFixed(1)+"px";
+    t.style.fontSize=(n._fs*k).toFixed(1)+"px";if(n._fit)n._fit();
   };
   const ctr=n=>{const r=n.querySelector(".pf").getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2};};
   const mk=()=>{
@@ -647,7 +663,12 @@ function renderAttend(){
 }
 
 function renderBoard(){
-  if(!cat){$main.appendChild(el("div","empty hintdoor","문을 눌러 들어가보세요 🌙"));return;}
+  if(!cat){{
+      const RULES=[["1. 익명으로 고민을 올립니다.","고민 주인에 대한 추측성 대화는 자제해주세요.\n당사자가 직접 밝히는 경우는 괜찮습니다.\n답변 주인에 대한 추측 또한 마찬가지!"],["2. 어떤 고민이든 환영!","(단, 분위기를 해치는 내용이나 특정인 언급·저격성 내용은 제외될 수 있습니다.)"],["3. 한번 올린 고민과 댓글은 수정 및 삭제가 불가합니다.","(삭제를 원하시면 관리자에게 1:1 주세요)"],["4. 고민은 올린 날짜로부터 최대 일주일 보관됩니다.","ex) 월요일에 올린 고민은 다음주 월요일 자정에 사라짐"],["5. 규칙이 잘 지켜지지 않을시 대나무숲은 폐관 할 수도 있습니다",""]];
+      const rc=el("div","rules");rc.appendChild(el("div","rtitle","🎋 대나무숲 규칙"));
+      RULES.forEach(([h,b])=>{rc.appendChild(el("div","rh1",h));if(b)rc.appendChild(el("div","rb",b));});
+      $main.appendChild(rc);
+    };return;}
   const ci=info(cat),isW=cat==="worry";
   if(openKey){
     const p=posts.find(x=>catOf(x)===cat&&postKey(x)===openKey);
@@ -687,7 +708,6 @@ function renderBoard(){
       sw.appendChild(b);
     });
     $main.appendChild(sw);
-    if(pickShape!==null&&SH[pickShape].k==="paper")$main.appendChild(el("div","atxt","포스트잇이 아니라 그림을 그릴 수 있는 도화지예요 🎨"));
     if(pickShape!==null)renderComposer();
   }
   const sp=el("div");sp.style.height="16px";$main.appendChild(sp);
@@ -717,7 +737,7 @@ function renderBoard(){
       const m=el("button","mrow");
       const mm=el("span","mm");mm.innerHTML=crescent("n"+postKey(p).replace(/[^a-z0-9]/gi,""));
       const mt=el("span","mt");
-      mt.append(el("span","mtt","#"+dispNo(p)+" "+(p.title||"(제목 없음)")),el("span","mtc",`댓글 ${comments.filter(c=>c.postId===postKey(p)).length}`));
+      mt.append(el("span","mtt","#"+dispNo(p)+" "+(p.title||"(제목 없음)")),el("span","mtc",`${fmtBlog(p.ts)} · 댓글 ${comments.filter(c=>c.postId===postKey(p)).length}`));
       m.append(mm,mt);
       m.setAttribute("aria-label","고민 "+dispNo(p));
       if(isNew(p))m.appendChild(el("span","new","NEW"));
@@ -751,6 +771,7 @@ function postCard(p){
   const no=el("div","no",p.n!=null?`#${dispNo(p)}번째 ${info(catOf(p)).unit}`:"메모판 글");
   if(viewNew.has(p.id))no.appendChild(el("span","new in","NEW"));
   c.appendChild(no);
+  if(isW&&p.ts)c.appendChild(el("div","mtc",fmtBlog(p.ts)));
   if(p.title)c.appendChild(el("div","ptitle",p.title));
   c.appendChild(el("div","txt",p.text));
   if(p.draw){const im=el("img","drawfull");im.src=p.draw;im.alt="";c.appendChild(im);}
@@ -802,7 +823,7 @@ function renderReview(){
   [...pending].sort((a,b)=>a.ts-b.ts).forEach(r=>{
     const k=catOf(r);
     const c=el("div","post");
-    const nn=el("div","no",`검수 대기 · ${k==="worry"?"고민":"게시판"}`);nn.appendChild(el("span","new in","NEW"));c.appendChild(nn);
+    const nn=el("div","no",`검수 대기 · ${k==="worry"?"고민":"게시판"}`);if(inboxPrev!==null&&r.ts>inboxPrev)nn.appendChild(el("span","new in","NEW"));c.appendChild(nn);
     if(r.title)c.appendChild(el("div","ptitle",r.title));
     c.appendChild(el("div","txt",r.text));
     const row=el("div","row");
