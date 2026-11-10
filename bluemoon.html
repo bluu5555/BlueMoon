@@ -169,6 +169,8 @@ button:disabled{opacity:.4}
 .rh{position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid #5b8def;z-index:60;touch-action:none}
 .pn{position:absolute;filter:drop-shadow(0 3px 5px rgba(0,0,0,.28))}
 .pn{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.pn.holding{animation:hold 1.65s ease-out forwards}
+@keyframes hold{from{filter:drop-shadow(0 0 0 rgba(160,200,255,0))}to{filter:drop-shadow(0 0 14px rgba(160,200,255,1))}}
 .pn.editing{outline:2px dashed rgba(255,255,255,.9);outline-offset:8px}
 .editbar{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:150;display:flex;gap:8px;align-items:center;padding:10px 12px;border-radius:16px;background:rgba(14,22,58,.96);border:1px solid rgba(143,184,255,.4);color:#dbe8ff;font-size:13px;line-height:1.4;max-width:94vw}
 .pn.ghost{touch-action:none;cursor:grab;z-index:50!important;outline:2px dashed rgba(255,255,255,.9);outline-offset:8px}
@@ -546,18 +548,21 @@ function boardNote(p,ghost){
       cx.onclick=()=>{exit();render();};
       bar.append(el("span","","끌어서 옮기고, 모서리는 크기, 위의 파란 동그라미는 방향"),ok,cx);document.body.appendChild(bar);
     };
+    let ht=null;
+    const stopHold=()=>{clearTimeout(tm);clearTimeout(ht);tm=null;ht=null;wrap.classList.remove("holding");};
+    const startHold=(cx,cy)=>{if(isAdmin&&selMode)return;sx=cx;sy=cy;stopHold();tm=setTimeout(()=>{wrap.classList.remove("holding");enter();},2000);ht=setTimeout(()=>wrap.classList.add("holding"),350);};
+    const moveHold=(cx,cy)=>{if(tm&&Math.hypot(cx-sx,cy-sy)>12)stopHold();};
     wrap.onpointerdown=e=>{
       if(isAdmin&&selMode)return;
-      sx=e.clientX;sy=e.clientY;
       if(editing){dragging=true;try{wrap.setPointerCapture(e.pointerId);}catch(_){}e.preventDefault();return;}
-      clearTimeout(tm);tm=setTimeout(enter,2000);
+      startHold(e.clientX,e.clientY);
     };
-    wrap.onpointermove=e=>{
-      if(editing){if(dragging)pos(e);return;}
-      if(tm&&Math.hypot(e.clientX-sx,e.clientY-sy)>10){clearTimeout(tm);tm=null;}
-    };
-    const up=()=>{clearTimeout(tm);tm=null;dragging=false;};
-    wrap.onpointerup=up;wrap.onpointercancel=up;
+    wrap.onpointermove=e=>{if(editing){if(dragging)pos(e);return;}moveHold(e.clientX,e.clientY);};
+    wrap.onpointerup=()=>{stopHold();dragging=false;};
+    wrap.onpointercancel=()=>{dragging=false;};
+    wrap.ontouchstart=e=>{if(!editing&&!tm&&e.touches[0])startHold(e.touches[0].clientX,e.touches[0].clientY);};
+    wrap.ontouchmove=e=>{if(!editing&&e.touches[0])moveHold(e.touches[0].clientX,e.touches[0].clientY);};
+    wrap.ontouchend=()=>{if(!editing)stopHold();};
     wrap.oncontextmenu=e=>e.preventDefault();
     wrap.onclick=()=>{if(lp){lp=false;return;}if(editing)return;if(isAdmin&&selMode)selTog(p);else openPost(p);};
   }
