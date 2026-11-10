@@ -136,6 +136,7 @@ textarea{width:100%;min-height:110px}
 .mn svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 6px rgba(120,170,255,.65))}
 .mn .new{top:-2px;right:0}
 .empty{color:var(--sub);text-align:center;padding:30px 0}
+.nt{font-size:13.5px;color:#aebce8;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.22);border-radius:12px;padding:9px 12px;margin:0 0 12px;line-height:1.5;word-break:keep-all}
 .rules{margin:26px 0 10px;padding:18px 18px 14px;border-radius:18px;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.25);text-align:left}
 .rtitle{font-size:20px;color:#e8f0ff;margin-bottom:8px}
 .rh1{font-size:15px;color:#e8f0ff;margin-top:12px;word-break:keep-all}
@@ -176,7 +177,6 @@ button:disabled{opacity:.4}
 .pn.ghost{touch-action:none;cursor:grab;z-index:50!important;outline:2px dashed rgba(255,255,255,.9);outline-offset:8px}
 .tape{position:absolute;top:-9px;height:17px;z-index:3;opacity:.9;background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.6) 0 3px,transparent 3px 7px);box-shadow:0 1px 2px rgba(0,0,0,.15);clip-path:polygon(0 0,100% 0,97% 25%,100% 50%,97% 75%,100% 100%,0 100%,3% 75%,0 50%,3% 25%)}
 .sh-square{border-radius:22px}.sh-circle{border-radius:50%}.sh-paper{border-radius:4px}
-#bgmb{position:fixed;right:14px;bottom:14px;z-index:60;width:44px;height:44px;border-radius:50%;padding:0;font-size:20px;opacity:.9}
 @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(35deg)}3%{opacity:1}13%{opacity:0;transform:translate(170px,119px) rotate(35deg)}100%{opacity:0;transform:translate(170px,119px) rotate(35deg)}}
 .attwrap{position:relative;overflow:hidden}.attwrap .tree{position:relative;z-index:1}
 .skyfx{position:absolute;inset:0;pointer-events:none}
@@ -212,7 +212,7 @@ if(ok){load();return;}
 g.innerHTML='<div class="gbox"><div style="color:#cfe0ff;font-size:28px;margin:6px 0 12px;text-shadow:0 0 16px #5b8def">암호를 대라!</div><input id="gpw" type="password" placeholder="암호" enterkeyhint="go" autocomplete="off"><div class="gerr" id="gmsg"></div></div>';
 var pw=document.getElementById("gpw");
 function tryIn(){
-  if(h(pw.value.trim())===H){try{sessionStorage.setItem("bm_ok",H);}catch(e){}load();if(window.__bgmAuto)window.__bgmAuto();}
+  if(h(pw.value.trim())===H){try{sessionStorage.setItem("bm_ok",H);}catch(e){}load();}
   else{pw.value="";msg("틀렸다! 다시 대라!","#ff8a80");pw.focus();}
 }
 pw.oninput=function(){if(h(pw.value.trim())===H)tryIn();};
@@ -227,26 +227,6 @@ pw.onkeydown=function(e){if(e.key==="Enter")tryIn();};
   <div id="main"><div class="empty">불러오는 중...</div></div>
   <div class="foot" id="foot"></div>
 </div>
-<script>
-(function(){
-var ac,mg,timer,on=false,step=0,au=null,hasMp3=false,btn=document.createElement("button");
-btn.id="bgmb";btn.textContent="🔇";btn.setAttribute("aria-label","배경음 켜고 끄기");document.body.appendChild(btn);
-var BG=["bgm.mp3","bgm.m4a","bgm.ogg","bgm.wav"],bgSrc="";try{BG.reduce(function(p,f){return p.then(function(){if(bgSrc)return;return fetch(f,{method:"HEAD"}).then(function(r){if(r.ok)bgSrc=f;}).catch(function(){});});},Promise.resolve());}catch(e){}
-var CH=[[220,261.6,329.6],[174.6,220,261.6],[261.6,329.6,392],[196,246.9,293.7]],SC=[440,523.3,587.3,659.3,784,880,1046.5];
-function note(f,t,d,v,ty){var o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(mg);o.start(t);o.stop(t+d+.05);}
-function tick(){var t=ac.currentTime+.05;if(step%16===0)CH[(step/16)%4].forEach(function(f){note(f/2,t,7.5,.06,"sine");});if(step%2===0||Math.random()<.3)note(SC[Math.floor(Math.random()*SC.length)],t,2,.08,"triangle");step++;}
-function start(){
-  if(on)return;on=true;btn.textContent="🎵";
-  if(bgSrc){au=au||new Audio(bgSrc);au.loop=true;au.volume=.4;au.play().catch(function(){});return;}
-  var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
-  if(!ac){ac=new AC();mg=ac.createGain();mg.gain.value=.55;mg.connect(ac.destination);}
-  ac.resume();tick();timer=setInterval(tick,650);
-}
-function stop(){on=false;btn.textContent="🔇";if(au)au.pause();clearInterval(timer);if(ac)ac.suspend();}
-btn.onclick=function(){if(on){stop();try{localStorage.setItem("bm_bgm","0");}catch(e){}}else{start();try{localStorage.setItem("bm_bgm","1");}catch(e){}}};
-window.__bgmAuto=function(){var p;try{p=localStorage.getItem("bm_bgm");}catch(e){}if(p!=="0")start();};
-})();
-</script>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,signInAnonymously,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
@@ -279,10 +259,23 @@ let selMode=false,sel=new Set(),trashSel=new Set(),trashOpen={board:true,worry:t
 const dispNo=p=>{const l=posts.filter(x=>catOf(x)===catOf(p)&&x.n!=null).sort((a,b)=>a.n-b.n);return l.findIndex(x=>x.id===p.id)+1;};
 const selTog=p=>{sel.has(p.id)?sel.delete(p.id):sel.add(p.id);render();};
 const chk=p=>el("span","chk"+(sel.has(p.id)?" on":""),sel.has(p.id)?"✓":"");
-async function trashPosts(list){
+const DAYMS=86400000,KST=9*3600000;
+const dayStart=ts=>Math.floor((ts+KST)/DAYMS)*DAYMS-KST;
+const expAt=p=>!p.ts?Infinity:dayStart(p.ts)+(catOf(p)==="worry"?7:1)*DAYMS;
+const liveP=p=>Date.now()<expAt(p);
+async function sweep(){
+  if(!isAdmin||sweeping||!pLoaded||!cLoaded)return;
+  const ex=allPosts.filter(p=>!liveP(p));
+  if(!ex.length)return;
+  sweeping=true;
+  try{await trashPosts(ex,true);}catch(e){}
+  sweeping=false;
+}
+setInterval(()=>{const n=allPosts.filter(liveP);if(n.length!==posts.length){posts=n;safeRender();}sweep();},60000);
+async function trashPosts(list,auto){
   for(const p of list){
     const cm=comments.filter(m=>m.postId===postKey(p)).sort((a,b)=>a.ts-b.ts);
-    const d={kind:"post",cat:catOf(p),text:p.text||"",ts:p.ts||0,delAt:Date.now()};
+    const d={kind:"post",cat:catOf(p),text:p.text||"",ts:p.ts||0,delAt:Date.now()};if(auto)d.auto=1;
     if(p.title)d.title=p.title;if(p.n!=null)d.n=p.n;if(typeof p.shape==="number")d.shape=p.shape;if(p.draw)d.draw=p.draw;
     if(cm.length)d.comments=cm.map(m=>({text:m.text,ts:m.ts||0}));
     const b=writeBatch(db);b.set(doc(db,"trash","p-"+p.id),d);b.delete(doc(db,"posts",p.id));cm.forEach(m=>b.delete(doc(db,"comments",m.id)));
@@ -305,7 +298,7 @@ const postKey=p=>p.n==null?"b-"+p.id:(p.cat?p.cat+"-"+p.n:String(p.n));
 const counterId=k=>k==="worry"?"counter":"counter_"+k;
 let seen={};try{seen=JSON.parse(localStorage.getItem("bm_seen")||"{}");}catch(e){}
 const saveSeen=()=>{try{const k=Object.keys(seen);if(k.length>600)k.slice(0,k.length-600).forEach(x=>delete seen[x]);localStorage.setItem("bm_seen",JSON.stringify(seen));}catch(e){}};
-let viewNew=new Set(),doorSeen={},placing=null,placeX=50,placeY=45,inboxPrev=null,editingAny=false;
+let viewNew=new Set(),doorSeen={},placing=null,placeX=50,placeY=45,inboxPrev=null,editingAny=false,allPosts=[],pLoaded=false,cLoaded=false,sweeping=false;
 try{doorSeen=JSON.parse(localStorage.getItem("bm_door")||"{}");}catch(e){}
 const markDoor=k=>{doorSeen[k]=Date.now();try{localStorage.setItem("bm_door",JSON.stringify(doorSeen));}catch(e){}};
 const isNew=p=>p.ts&&Date.now()-p.ts<DAY&&!seen[p.id];
@@ -372,7 +365,7 @@ function renderCal(){
 })();
 function render(){
   $cats.innerHTML="";
-  const defs=[{k:"attend",name:"출석 체크"},{k:"board",name:"자유 게시판"},{k:"worry",name:"고민"},{k:"admin",name:"관리자"}];
+  const defs=[{k:"attend",name:"출석 체크"},{k:"board",name:"자유 게시판"},{k:"worry",name:"고민 게시판"},{k:"admin",name:"관리자"}];
   defs.forEach(d=>{
     let label=d.name;
     if(d.k==="worry")label+=` (${posts.filter(p=>catOf(p)==="worry").length})`;
@@ -712,6 +705,7 @@ function renderBoard(){
   }
   if(sent)$main.appendChild(el("div","msg",isW?"접수됐어요! 관리자가 확인한 뒤 올라가요.":"메모판에 붙였어요! 🎀"));
   if(!isW&&placing){renderPlace();return;}
+  $main.appendChild(el("div","nt",isW?"🗓️ 올라온 고민은 올린 날로부터 7일 뒤 자정에 사라져요. 예) 월요일에 올린 고민은 다음 주 월요일 자정에 사라져요.":"🧹 메모장은 매일 자정에 청소해요. 붙인 포스트잇은 그날 자정에 모두 사라져요."));
   if(isW){
     const btn=el("button","pri",showForm?"닫기":ci.write);
     btn.onclick=()=>{showForm=!showForm;sent=false;render();};
@@ -896,7 +890,7 @@ function renderTrash(){
     items.forEach(t=>{
       const on=trashSel.has(t.id),c=el("div","post");c.style.cursor="pointer";
       c.onclick=()=>{on?trashSel.delete(t.id):trashSel.add(t.id);render();};
-      const lab=t.kind==="comment"?"댓글"+(t.from?" · "+t.from:""):(t.delAt?"삭제됨":"거부됨");
+      const lab=t.kind==="comment"?"댓글"+(t.from?" · "+t.from:""):(t.auto?"기간 만료":t.delAt?"삭제됨":"거부됨");
       c.appendChild(el("div","no",`${on?"☑️":"⬜"} ${lab} · ${fmtBlog(t.delAt||t.rejectedAt)}`));
       if(t.title)c.appendChild(el("div","ptitle",t.title));
       c.appendChild(el("div","txt",t.text));
@@ -912,8 +906,8 @@ function listen(name,setter,ord){
 }
 function startSubs(){
   unsubs.forEach(u=>u());unsubs=[];
-  unsubs.push(listen("posts",a=>{posts=a;setTimeout(()=>window.__gate.ready(),0);},"ts"));
-  unsubs.push(listen("comments",a=>comments=a,"ts"));
+  unsubs.push(listen("posts",a=>{allPosts=a;pLoaded=true;posts=a.filter(liveP);sweep();setTimeout(()=>window.__gate.ready(),0);},"ts"));
+  unsubs.push(listen("comments",a=>{comments=a;cLoaded=true;sweep();},"ts"));
   subDay=dkey();
   unsubs.push(onSnapshot(query(collection(db,"attend"),where("d","==",subDay)),s=>{attend=s.docs.map(d=>({id:d.id,...d.data()}));safeRender();},()=>{}));
   unsubs.push(onSnapshot(doc(db,"visits",subDay),s=>{visitsN=s.exists()?(s.data().n||0):0;renderCal();},()=>{}));
