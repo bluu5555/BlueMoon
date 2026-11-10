@@ -136,7 +136,8 @@ textarea{width:100%;min-height:110px}
 .mn svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 6px rgba(120,170,255,.65))}
 .mn .new{top:-2px;right:0}
 .empty{color:var(--sub);text-align:center;padding:30px 0}
-.nt{font-size:13.5px;color:#aebce8;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.22);border-radius:12px;padding:9px 12px;margin:0 0 12px;line-height:1.5;word-break:keep-all}
+.aubadge{background:#5b8def;color:#fff;font-size:11px;padding:2px 8px;border-radius:99px;margin-right:6px}
+.nt{white-space:pre-line;font-size:13.5px;color:#aebce8;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.22);border-radius:12px;padding:9px 12px;margin:0 0 12px;line-height:1.5;word-break:keep-all}
 .rules{margin:26px 0 10px;padding:18px 18px 14px;border-radius:18px;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.25);text-align:left}
 .rtitle{font-size:20px;color:#e8f0ff;margin-bottom:8px}
 .rh1{font-size:15px;color:#e8f0ff;margin-top:12px;word-break:keep-all}
@@ -705,7 +706,7 @@ function renderBoard(){
   }
   if(sent)$main.appendChild(el("div","msg",isW?"접수됐어요! 관리자가 확인한 뒤 올라가요.":"메모판에 붙였어요! 🎀"));
   if(!isW&&placing){renderPlace();return;}
-  $main.appendChild(el("div","nt",isW?"🗓️ 올라온 고민은 올린 날로부터 7일 뒤 자정에 사라져요. 예) 월요일에 올린 고민은 다음 주 월요일 자정에 사라져요.":"🧹 메모장은 매일 자정에 청소해요. 붙인 포스트잇은 그날 자정에 모두 사라져요."));
+  $main.appendChild(el("div","nt",isW?"고민은 7일간 유지됩니다.\nex) 월요일 23:55에 올린 고민은 다음주 월요일 자정에 사라짐":"자유게시판은 매일 자정에 청소됩니다"));
   if(isW){
     const btn=el("button","pri",showForm?"닫기":ci.write);
     btn.onclick=()=>{showForm=!showForm;sent=false;render();};
@@ -718,7 +719,8 @@ function renderBoard(){
         const t=ta.value.trim(),ttl=ti.value.trim();
         if(!t||!ttl){alert("제목과 내용을 모두 적어주세요.");return;}
         go.disabled=true;
-        try{await addDoc(collection(db,"pending"),{text:t,title:ttl,ts:Date.now(),cat});showForm=false;sent=true;render();}
+        const ah=Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b=>b.toString(16).padStart(2,"0")).join("");
+        try{await addDoc(collection(db,"pending"),{text:t,title:ttl,ts:Date.now(),cat,ah});try{const L=JSON.parse(localStorage.getItem("bm_my")||"[]");L.push(ah);localStorage.setItem("bm_my",JSON.stringify(L.slice(-200)));}catch(e){}showForm=false;sent=true;render();}
         catch(e){go.disabled=false;alert("보내지 못했어요. 다시 시도해주세요.");}};
       $main.append(ta,go);
     }
@@ -824,7 +826,7 @@ function postCard(p){
   box.appendChild(el("div","chead",`댓글 ${list.length}`));
   list.forEach(m=>{
     const d=el("div","bc"),body=el("div","bcb"),head=el("div","bch");
-    const mo=el("span","cmoon");mo.innerHTML=crescent("c"+m.id.replace(/[^a-z0-9]/gi,""));head.appendChild(mo);
+    const mo=el("span","cmoon");mo.innerHTML=crescent("c"+m.id.replace(/[^a-z0-9]/gi,""));head.appendChild(mo);if(m.au)head.appendChild(el("span","aubadge","글쓴이"));
     head.appendChild(el("span","",fmtBlog(m.ts)));
     if(viewNew.has(m.id))head.appendChild(el("span","new in","NEW"));
     if(isAdmin){
@@ -837,9 +839,10 @@ function postCard(p){
   });
   c.appendChild(box);
   const form=el("div","cform");
+  const mineP=(()=>{try{return !!p.ah&&JSON.parse(localStorage.getItem("bm_my")||"[]").includes(p.ah);}catch(e){return false;}})();
   const ta=el("textarea");ta.placeholder="댓글을 남겨보세요";ta.maxLength=200;
   const b=el("button","pri","올리기");
-  b.onclick=()=>{const t=ta.value.trim();if(!t)return;ta.value="";addDoc(collection(db,"comments"),{postId:key,text:t,ts:Date.now()}).catch(()=>alert("올리지 못했어요."));};
+  b.onclick=()=>{const t=ta.value.trim();if(!t)return;ta.value="";addDoc(collection(db,"comments"),{postId:key,text:t,ts:Date.now(),...(mineP?{au:1}:{})}).catch(()=>alert("올리지 못했어요."));};
   form.append(ta,b);c.appendChild(form);return c;
 }
 
@@ -857,7 +860,7 @@ function renderReview(){
       try{await runTransaction(db,async tx=>{
         const cref=doc(db,"meta",counterId(k));const s=await tx.get(cref);
         const n=(s.exists()?s.data().n:0)+1;
-        const d={n,cat:k,text:r.text,ts:Date.now()};if(r.title)d.title=r.title;
+        const d={n,cat:k,text:r.text,ts:Date.now()};if(r.title)d.title=r.title;if(r.ah)d.ah=r.ah;
         tx.set(cref,{n});tx.set(doc(db,"posts",k+"-"+n),d);tx.delete(doc(db,"pending",r.id));
       });}catch(e){alert("처리하지 못했어요.");ok.disabled=false;}};
     const no=el("button","danger","거부 → 휴지통");
@@ -870,7 +873,7 @@ function renderReview(){
 
 function renderTrash(){
   if(!trash.length){$main.appendChild(el("div","empty","휴지통이 비어 있어요."));return;}
-  [["board","포스트잇"],["worry","고민 + 댓글"]].forEach(([fk,fl])=>{
+  [["board","메모 게시판"],["worry","고민 게시판"]].forEach(([fk,fl])=>{
     const items=trash.filter(t=>(catOf(t)==="worry"?"worry":"board")===fk).sort((a,b)=>(b.delAt||b.rejectedAt||0)-(a.delAt||a.rejectedAt||0));
     const open=trashOpen[fk],hd=el("button","pri",`${open?"📂":"📁"} ${fl} (${items.length})`);
     hd.style.cssText="width:100%;text-align:left;margin-bottom:10px";
