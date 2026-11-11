@@ -137,6 +137,10 @@ textarea{width:100%;min-height:110px}
 .mn .new{top:-2px;right:0}
 .empty{color:var(--sub);text-align:center;padding:30px 0}
 .aubadge{background:#5b8def;color:#fff;font-size:11px;padding:2px 8px;border-radius:99px;margin-right:6px}
+.ttrow{display:flex;gap:8px;align-items:center}
+.ttrow .ptitle,.ttrow .mtt{flex:1;min-width:0}
+.dday{flex:none;font-size:11.5px;padding:2px 9px;border-radius:99px;background:rgba(91,141,239,.28);color:#cfe0ff;font-weight:600}
+.dday.hot{background:rgba(255,160,90,.28);color:#ffd5b0}
 .nt{white-space:pre-line;font-size:13.5px;color:#aebce8;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.22);border-radius:12px;padding:9px 12px;margin:0 0 12px;line-height:1.5;word-break:keep-all}
 .rules{margin:26px 0 10px;padding:18px 18px 14px;border-radius:18px;background:rgba(91,141,239,.1);border:1px solid rgba(143,184,255,.25);text-align:left}
 .rtitle{font-size:20px;color:#e8f0ff;margin-bottom:8px}
@@ -264,6 +268,7 @@ const DAYMS=86400000,KST=9*3600000;
 const dayStart=ts=>Math.floor((ts+KST)/DAYMS)*DAYMS-KST;
 const expAt=p=>!p.ts?Infinity:dayStart(p.ts)+(catOf(p)==="worry"?7:1)*DAYMS;
 const liveP=p=>Date.now()<expAt(p);
+const ddayN=p=>Math.max(1,Math.ceil((expAt(p)-Date.now())/DAYMS));
 async function sweep(){
   if(!isAdmin||sweeping||!pLoaded||!cLoaded)return;
   const ex=allPosts.filter(p=>!liveP(p));
@@ -764,7 +769,9 @@ function renderBoard(){
       const m=el("button","mrow");
       const mm=el("span","mm");mm.innerHTML=crescent("n"+postKey(p).replace(/[^a-z0-9]/gi,""));
       const mt=el("span","mt");
-      mt.append(el("span","mtt","#"+dispNo(p)+" "+(p.title||"(제목 없음)")),el("span","mtc",`${fmtBlog(p.ts)} · 댓글 ${comments.filter(c=>c.postId===postKey(p)).length}`));
+      const tr=el("span","ttrow");tr.appendChild(el("span","mtt","#"+dispNo(p)+" "+(p.title||"(제목 없음)")));
+      if(p.ts){const dd=ddayN(p);tr.appendChild(el("span","dday"+(dd<=2?" hot":""),"D-"+dd));}
+      mt.append(tr,el("span","mtc",`${fmtBlog(p.ts)} · 댓글 ${comments.filter(c=>c.postId===postKey(p)).length}`));
       m.append(mm,mt);
       m.setAttribute("aria-label","고민 "+dispNo(p));
       if(isNew(p))m.appendChild(el("span","new","NEW"));
@@ -799,7 +806,12 @@ function postCard(p){
   if(viewNew.has(p.id))no.appendChild(el("span","new in","NEW"));
   c.appendChild(no);
   if(isW&&p.ts)c.appendChild(el("div","mtc",fmtBlog(p.ts)));
-  if(p.title)c.appendChild(el("div","ptitle",p.title));
+  if(p.title){
+    if(isW&&p.ts){
+      const tr=el("div","ttrow"),dd=ddayN(p);tr.append(el("div","ptitle",p.title),el("span","dday"+(dd<=2?" hot":""),"D-"+dd));c.appendChild(tr);
+      const e=new Date(expAt(p)+KST);c.appendChild(el("div","mtc",`${e.getUTCMonth()+1}월 ${e.getUTCDate()}일 (${WD[e.getUTCDay()]}) 자정에 사라져요`));
+    }else c.appendChild(el("div","ptitle",p.title));
+  }
   c.appendChild(el("div","txt",p.text));
   if(p.draw){const im=el("img","drawfull");im.src=p.draw;im.alt="";c.appendChild(im);}
   if(isAdmin){
